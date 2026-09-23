@@ -1,0 +1,92 @@
+/* GENERELT DESIGN */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f2ec;
+  color: #27231e;
+}
+
+/* HEADER */
+
+header {
+  padding: 25px 5%;
+  border-bottom: 1px solid #d9d3cb;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+/* HOVEDINDHOLD */
+
+main {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+/* PRODUKTLISTE */
+
+#productlistcontainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 20px;
+}
+
+/* PRODUKTKORT */
+
+.productCard {
+  min-width: 0;
+}
+
+.productCard img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.productCard h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.productCard p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* KNAP TIL PRODUKTDETALJER */
+
+.productCard a {
+  display: block;
+  padding: 15px;
+  background-color: #27231e;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.productCard a:hover {
+  background-color: #575047;
+}
+
+/* MEDIA QUERY - STØRRE SKÆRME */
+
+@media screen and (min-width: 768px) {
+  #productlistcontainer {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
