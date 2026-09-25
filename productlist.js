@@ -1,65 +1,36 @@
-// console.log("hul igennem");
+const cat = new URLSearchParams(window.location.search).get("cat");
+// console.log(id);
 
-// const endpoint = "https://kea-alt-del.dk/t7/api/products";
+const endpoint = `https://kea-alt-del.dk/t7/api/products?category=${cat}`;
 
-// function getData() {
-//   fetch(endpoint)
-//     .then((res) => res.json())
-//     .then(showProducts);
-// }
+const produktliste = document.querySelector(".produktliste");
 
-// function showProducts(products) {
-//   console.log(products);
-// }
-// getData();
+// console.log(produktliste);
 
-console.log("hul igennem");
+const h2 = document.querySelector("h2");
+h2.textContent = cat;
 
-// Her er adressen til vores API
-const endpoint = "https://kea-alt-del.dk/t7/api/products";
+fetch(endpoint)
+  .then((res) => res.json())
+  .then(visData);
 
-// Her finder vi vores HTML-container
-const container = document.querySelector("#productlistcontainer");
+function visData(json) {
+  //   console.log(produktliste);
 
-// Denne funktion henter vores produkter
-function getData() {
-  fetch(endpoint)
-    .then((res) => res.json())
-    .then(showProducts);
-}
-
-// Denne funktion viser vores produkter
-function showProducts(products) {
-  console.log(products);
-
-  // Vi opretter en tom tekststreng
-  let markup = "";
-
-  // Vi gennemgår hvert produkt
-  products.slice(0, 10).forEach((product) => {
-    markup += `
-      <article class="productCard">
-
-        <img
-          src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp"
-          alt="${product.productdisplayname}"
-        />
-
-        <h3>${product.productdisplayname}</h3>
-
-        <p>${product.price} DKK</p>
-
-        <a href="productdetails.html?id=${product.id}">
-          Se produkt
-        </a>
-
-      </article>
+  json.forEach((element) => {
+    produktliste.innerHTML += `
+      <a class="link" href=productdetails.html?id=${element.id}>
+        <article class="productCard">
+          <img src="https://kea-alt-del.dk/t7/images/webp/640/${element.id}.webp" alt="produktbillede" />
+          <h2>${element.productdisplayname}</h2>
+          <h3>${element.articletype}</h3>
+          <p>${element.category}</p>
+          <p>${element.price} DKK</p>
+        </article>
+      </a>
     `;
   });
-
-  // Her indsætter vi produkterne i vores HTML
-  container.innerHTML = markup;
 }
 
-// Vi starter programmet
-getData();
+const backbutton = document.querySelector("#backbutton");
+backbutton.addEventListener("click", () => history.back());
