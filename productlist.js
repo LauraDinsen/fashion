@@ -13,53 +13,81 @@
 // }
 // getData();
 
-console.log("hul igennem");
+// console.log("hul igennem");
 
-// Her er adressen til vores API
+// // Her er adressen til vores API
+// const endpoint = "https://kea-alt-del.dk/t7/api/products";
+
+// // Her finder vi vores HTML-container
+// const container = document.querySelector("#productlistcontainer");
+
+// // Denne funktion henter vores produkter
+// function getData() {
+//   fetch(endpoint)
+//     .then((res) => res.json())
+//     .then(showProducts);
+// }
+
+// // Denne funktion viser vores produkter
+// function showProducts(products) {
+//   console.log(products);
+
+//   // Vi opretter en tom tekststreng
+//   let markup = "";
+
+//   // Vi gennemgår hvert produkt
+//   products.slice(0, 10).forEach((product) => {
+//     markup += `
+//       <article class="productCard">
+
+//         <img
+//           src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp"
+//           alt="${product.productdisplayname}"
+//         />
+
+//         <h3>${product.productdisplayname}</h3>
+
+//         <p>${product.price} DKK</p>
+
+//         <a href="productdetails.html?id=${product.id}">
+//           Se produkt
+//         </a>
+
+//       </article>
+//     `;
+//   });
+
+//   // Her indsætter vi produkterne i vores HTML
+//   container.innerHTML = markup;
+// }
+
+// // Vi starter programmet
+// getData();
+
 const endpoint = "https://kea-alt-del.dk/t7/api/products";
 
-// Her finder vi vores HTML-container
-const container = document.querySelector("#productlistcontainer");
+const produktliste = document.querySelector(".produktliste");
 
-// Denne funktion henter vores produkter
-function getData() {
-  fetch(endpoint)
-    .then((res) => res.json())
-    .then(showProducts);
-}
+// console.log(produktliste);
 
-// Denne funktion viser vores produkter
-function showProducts(products) {
-  console.log(products);
+fetch(endpoint)
+  .then((res) => res.json())
+  .then(visData);
 
-  // Vi opretter en tom tekststreng
-  let markup = "";
+function visData(json) {
+  //   console.log(produktliste);
 
-  // Vi gennemgår hvert produkt
-  products.slice(0, 10).forEach((product) => {
-    markup += `
-      <article class="productCard">
-
-        <img
-          src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp"
-          alt="${product.productdisplayname}"
-        />
-
-        <h3>${product.productdisplayname}</h3>
-
-        <p>${product.price} DKK</p>
-
-        <a href="productdetails.html?id=${product.id}">
-          Se produkt
-        </a>
-
-      </article>
+  json.forEach((element) => {
+    produktliste.innerHTML += `
+      <a class="link" href=productdetails.html?id=${element.id}>
+        <article class="productCard">
+          <img src="https://kea-alt-del.dk/t7/images/webp/640/${element.id}.webp" alt="produktbillede" />
+          <h2>${element.productdisplayname}</h2>
+          <h3>${element.articletype}</h3>
+          <p>${element.category}</p>
+          <p>${element.price} DKK</p>
+        </article>
+      </a>
     `;
   });
-
-  // Her indsætter vi produkterne i vores HTML
-  container.innerHTML = markup;
 }
-
-// Vi starter programmet
-getData();
