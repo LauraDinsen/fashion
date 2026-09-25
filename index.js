@@ -13,7 +13,7 @@ function visData(json) {
 
   json.forEach((element) => {
     CatListContainer.innerHTML += `
-      <a class="link" href=productlist.html?cat=${element.category}>${element.category}</a>
+      <a class="link" href=productlist.html?cat=${encodeURIComponent(element.category)}>${element.category}</a>
     `;
   });
 }
