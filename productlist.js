@@ -5,20 +5,36 @@ const endpoint = `https://kea-alt-del.dk/t7/api/products?category=${cat}`;
 
 const produktliste = document.querySelector(".produktliste");
 
-// console.log(produktliste);
+document.querySelectorAll("#filter button").forEach((knap) => knap.addEventListener("click", filtrer));
 
-const h2 = document.querySelector("h2");
-h2.textContent = cat;
+let alledata, udsnit;
+
+function filtrer(e) {
+  console.log(e.target.textContent);
+  console.log(alledata, udsnit);
+  const valgt = e.target.textContent;
+  if (valgt == "Alle") {
+    visData(alledata);
+  } else udsnit = alledata.filtrer;
+  produkt = produkt.gender == valgt;
+}
+
+// const h2 = document.querySelector("h2");
+// h2.textContent = cat;
 
 fetch(endpoint)
   .then((res) => res.json())
-  .then(visData);
+  .then((data) => {
+    alleData = udsnit = data;
+    visData(data);
+  });
 
 function visData(json) {
-  //   console.log(produktliste);
+  produktliste.innerHTML = "";
 
   json.forEach((element) => {
     produktliste.innerHTML += `
+    
       <a class="link" href=productdetails.html?id=${element.id}>
         <article class="productCard">
           <img src="https://kea-alt-del.dk/t7/images/webp/640/${element.id}.webp" alt="produktbillede" />
