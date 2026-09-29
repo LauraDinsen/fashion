@@ -54,6 +54,19 @@ h2 {
   }
 }
 
+.soldOut {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.soldOutLabel {
+  font-weight: bold;
+}
+
+.tilbudslabel {
+  font-weight: bold;
+}
+
 #backbutton {
   margin-bottom: 12px;
   background-color: rgb(149, 175, 167);
