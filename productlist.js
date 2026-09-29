@@ -18,10 +18,21 @@ function visData(json) {
   //   console.log(produktliste);
 
   json.forEach((element) => {
+    console.log(element.productdisplayname, element.soldout);
     produktliste.innerHTML += `
       <a class="link" href=productdetails.html?id=${element.id}>
-        <article class="productCard">
-          <img src="https://kea-alt-del.dk/t7/images/webp/640/${element.id}.webp" alt="produktbillede" />
+        <article class="productCard" ${element.soldout ? "soldOut" : ""}">
+
+
+
+          <img src="https://kea-alt-del.dk/t7/images/webp/640/${element.id}.webp" alt="produktbillede" 
+          />
+
+           ${element.soldout ? `<p class="soldOutLabel">UDSOLGT</p>` : ""}
+
+          ${element.discount ? `<p class="tilbudslabel">-${element.discount}%</p>` : ""}
+
+
           <h2>${element.productdisplayname}</h2>
           <h3>${element.articletype}</h3>
           <p>${element.category}</p>

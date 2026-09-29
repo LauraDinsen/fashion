@@ -16,6 +16,9 @@ fetch(endpoint)
   .then(visData);
 
 function visData(element) {
+  // NYT: beregner tilbudsprisen
+  const tilbudspris = Math.round(element.price - (element.price * element.discount) / 100);
+
   console.log(produkt);
 
   produkt.innerHTML = `<a class="link" href=productdetails.html?id=${element.id}>
