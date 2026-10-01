@@ -15,12 +15,11 @@ fetch(endpoint)
   .then(visData);
 
 function visData(json) {
-  //   console.log(produktliste);
-
+  produktliste.innerHTML = "";
   json.forEach((element) => {
-    console.log(element.productdisplayname, element.soldout);
-    produktliste.innerHTML += `
-      <a class="link" href=productdetails.html?id=${element.id}>
+    const tilbudspris = Math.round(element.price - (element.price * element.discount) / 100);
+
+    produktliste.innerHTML += `<a class="link" href=productdetails.html?id=${element.id}>
         <article class="productCard" ${element.soldout ? "soldOut" : ""}">
 
 
