@@ -1,3 +1,5 @@
+// const { a } = require("shiki/dist/langs-bundle-full-B4n9xYHw.mjs");
+
 const cat = new URLSearchParams(window.location.search).get("cat");
 // console.log(id);
 
@@ -53,18 +55,23 @@ function visData(json) {
   produktliste.innerHTML = "";
 
   json.forEach((element) => {
-    produktliste.innerHTML += `
-    
-      <a class="link" href=productdetails.html?id=${element.id}>
+    const tilbudspris = Math.round(element.price - (element.price * element.discount) / 100);
+    produktliste.innerHTML += `<a class="productCard ${element.soldout ? "udsolgt" : ""}"   href=productdetails.html?id=${element.id}>
+
         <article class="productCard">
           <img src="https://kea-alt-del.dk/t7/images/webp/640/${element.id}.webp" alt="produktbillede" />
           <h2>${element.productdisplayname}</h2>
           <h3>${element.articletype}</h3>
           <p>${element.category}</p>
-          <p>${element.price} DKK</p>
+          ${
+            element.discount
+              ? `<p class="tilbudslabel">-${element.discount}%</p>
+          <p><span class="førpris"> før DKK ${element.price},-</span> Nu DKK ${tilbudspris},-</p>`
+              : `<p>DKK ${element.price},-</p>`
+          }
+         
         </article>
-      </a>
-    `;
+      </a>`;
   });
 }
 
