@@ -15,13 +15,13 @@ document.querySelectorAll("#sortering button").forEach((knap) => knap.addEventLi
 let alledata, udsnit;
 
 function filtrer(e) {
-  console.log(e.target.textContent);
-  console.log(alledata, udsnit);
   const valgt = e.target.textContent;
   if (valgt == "Alle") {
-    visData(alledata);
-  } else udsnit = alledata.filtrer;
-  produkt = produkt.gender == valgt;
+    udsnit = alleData;
+  } else {
+    udsnit = alleData.filter((produkt) => produkt.gender == valgt);
+  }
+  visData(udsnit);
 }
 
 function sorter(e) {
